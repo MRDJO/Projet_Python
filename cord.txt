@@ -1,0 +1,43 @@
+liste_matiere = MatieresTablesManip.listematiere(info_base)
+            nbr = len(liste_matiere)
+            tree = ttk.Treeview(app,columns=(1,2,3,4,5,6,7,8,9,10,11,12),show="headings")
+            tree.place(x=10,y=65,width=1200,height=300)
+            
+            tree.heading(1,text="NOM")
+            tree.heading(2,text="PRENOM")
+            tree.column(1,width=100)
+            tree.column(2,width=100)
+            test = 3
+            curseur.execute("SELECT code FROM matieres")
+            liste = curseur.fetchall()
+            for ligne in range(0,nbr):
+                tree.heading(ligne+test,text=liste[ligne])
+                tree.column(ligne+test,width=100)
+
+
+
+
+SELECT nom,prenom,matieres.code,notes.devoir,notes.examen,notes.projet,(notes.projet + notes.devoir + notes.examen*2)/4 as Moyenne FROM etudiants,obtenir,matieres,notes WHERE obtenir.matricule = etudiants.matricule AND obtenir.id_matiere = matieres.id_matiere AND notes.id_note = obtenir.id_note; 
+
+
+
+DELETE FROM obtenir WHERE id_note = 1 AND obtenir.matricule = 1 AND obtenir.id_matiere = 3;
+DELETE FROM notes WHERE id_note = 1
+
+
+#
+REQUETE SANS SUM 
+
+SELECT etudiants.nom,etudiants.prenom,matieres.code,matieres.coefficient,notes.devoir,notes.examen,notes.projet,(notes.examen*2 + notes.devoir + notes.projet)/4 as moyenne,((notes.examen*2 + notes.devoir + notes.projet)/4 * matieres.coefficient) As moyenne_coefficie FROM etudiants,obtenir,notes,matieres WHERE obtenir.id_note = notes.id_note AND obtenir.id_matiere = matieres.id_matiere AND obtenir.matricule = 1 AND etudiants.matricule = 1 
+
+# SOMME coefficient
+
+SELECT SUM(matieres.coefficient) FROM obtenir,matieres WHERE  obtenir.id_matiere = matieres.id_matiere AND obtenir.matricule = 1
+
+#SOMME SANS coefficient
+SELECT SUM((notes.examen*2 + notes.devoir + notes.projet)/4) FROM notes , obtenir WHERE obtenir.id_note = notes.id_note AND obtenir.matricule = 1
+
+
+#SOMME + coefficient
+
+SELECT SUM(((notes.examen*2 + notes.devoir +notes.projet)/4) * matieres.coefficient) FROM obtenir,matieres,notes WHERE obtenir.id_note = notes.id_note AND obtenir.id_matiere = matieres.id_matiere AND obtenir.matricule = 1

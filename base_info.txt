@@ -1,0 +1,3 @@
+Nom_base:TP_PYTHON
+user:root
+mot_de_passe:adminroot
