@@ -1,4 +1,5 @@
 ###
-N'AYANT PAS PU SECURISER SELON LE SYSTEME D'EXPLOITAION , LE FICHIER base_info.txt IL EST EST DONC PRIMORDIALE DE NE PAS LA CONFIGURATION PUISQU'ELLE CONTIENT DES DONNEES IMPORTANTES POUR LE BON FONCTIONEMENT DE L'APPLICATION
+# Ceci est une application native pour Windows développer en Python 
+# Elle traite de la gestion des étudiants dans une école 
 
 ###
